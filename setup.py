@@ -1,6 +1,5 @@
 import os
 from setuptools import setup
-from distutils.util import convert_path
 from distutils.command.install import INSTALL_SCHEMES
 from version import get_git_version
 
@@ -32,7 +31,7 @@ packages, data_files = [], []
 root_dir = os.path.dirname(__file__)
 if root_dir != '':
     os.chdir(root_dir)
-start_dir = ''
+start_dir = '.'
 
 for dirpath, dirnames, filenames in os.walk(start_dir):
     # Ignore dirnames that start with '.'
@@ -41,18 +40,19 @@ for dirpath, dirnames, filenames in os.walk(start_dir):
         if dirname.startswith('docs'): del dirnames[i]
         
     if '__init__.py' in filenames:
-        packages.append('.'.join(fullsplit(dirpath)))
+        packages.append('.'.join(fullsplit(dirpath))[2:])
     elif filenames:
         data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
 
 setup(
     name='python-money',
-    version=get_git_version(),
+    version='0.5.1',
     packages=packages,
     data_files=data_files,
     url='http://github.com/poswald/python-money',
     description='Primitives for working with money and currencies in Python',
     maintainer='Paul Oswald',
+    use_2to3=True,
     maintainer_email='pauloswald@gmail.com',
     long_description=open('README.md').read(),
     zip_safe=False,

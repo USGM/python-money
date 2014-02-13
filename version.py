@@ -113,7 +113,7 @@ def get_git_version(abbrev=4):
 
     # Finally, return the current version.
 
-    return version
+    return version.decode('utf-8')
 
 if __name__ == "__main__":
-    print get_git_version()
+    print(get_git_version())

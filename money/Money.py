@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import exceptions
 from decimal import Decimal
 
 class Currency:
@@ -32,7 +31,7 @@ def set_default_currency(code="XXX"):
     global DEFAULT_CURRENCY
     DEFAULT_CURRENCY = CURRENCY[code]
 
-class IncorrectMoneyInputError(exceptions.Exception):
+class IncorrectMoneyInputError(Exception):
     def __init__(self):
         return
     def __unicode__(self):
